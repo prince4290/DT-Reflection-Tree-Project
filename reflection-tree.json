@@ -1,0 +1,121 @@
+[
+  {
+    "id": "START",
+    "parentId": null,
+    "type": "start",
+    "text": "Welcome back. Let's take a few minutes to decompress from the day.",
+    "options": null,
+    "target": "A1_OPEN"
+  },
+  {
+    "id": "A1_OPEN",
+    "parentId": "START",
+    "type": "question",
+    "text": "Thinking about your main task today, how do you feel it went?",
+    "options": "Exactly as planned|Mostly out of my hands|I hit some walls|Better than expected",
+    "target": "A1_D1"
+  },
+  {
+    "id": "A1_D1",
+    "parentId": "A1_OPEN",
+    "type": "decision",
+    "logic": "answer=Exactly as planned|Better than expected:A1_Q_SUCCESS;answer=Mostly out of my hands|I hit some walls:A1_Q_STRUGGLE"
+  },
+  {
+    "id": "A1_Q_SUCCESS",
+    "parentId": "A1_D1",
+    "type": "question",
+    "text": "Great to hear. What was the primary driver of that success?",
+    "options": "My preparation and focus|The circumstances aligned|A bit of luck|Clear instructions from others",
+    "signal": "axis1:internal"
+  }
+][
+  {
+    "id": "BRIDGE_1_2",
+    "parentId": "A1_R_INT",
+    "type": "bridge",
+    "text": "Now that we’ve looked at your agency, let’s pivot to your impact on the team today.",
+    "target": "A2_OPEN"
+  },
+  {
+    "id": "A2_OPEN",
+    "parentId": "BRIDGE_1_2",
+    "type": "question",
+    "text": "When you look back at your interactions today, which moment stands out?",
+    "options": "I helped a colleague solve a problem|I shared a resource or idea|I felt my efforts weren't noticed|I waited for instructions",
+    "target": "A2_D1"
+  },
+  {
+    "id": "A2_D1",
+    "parentId": "A2_OPEN",
+    "type": "decision",
+    "logic": "answer=I helped a colleague|I shared a resource:A2_Q_GIVE;answer=I felt my efforts weren't noticed|I waited:A2_Q_EXPECT"
+  },
+  {
+    "id": "A2_Q_GIVE",
+    "parentId": "A2_D1",
+    "type": "question",
+    "text": "That sounds like a 'Citizenship' moment. What motivated you to step up?",
+    "options": "It’s just how I work|I saw a gap and filled it|I wanted to be recognized|It was part of my assigned task",
+    "signal": "axis2:contribution"
+  },
+  {
+    "id": "A2_Q_EXPECT",
+    "parentId": "A2_D1",
+    "type": "question",
+    "text": "It's easy to feel invisible when the pace is fast. In those moments, what did you feel you needed most?",
+    "options": "Clearer appreciation|More resources to do my job|Someone to take the lead|To just be left alone to work",
+    "signal": "axis2:entitlement"
+  }
+][
+  {
+    "id": "BRIDGE_2_3",
+    "parentId": "A2_Q_GIVE",
+    "type": "bridge",
+    "text": "Finally, let's zoom out from your specific tasks to the bigger picture.",
+    "target": "A3_OPEN"
+  },
+  {
+    "id": "A3_OPEN",
+    "parentId": "BRIDGE_2_3",
+    "type": "question",
+    "text": "When you think about the 'Success' of today, whose success are you measuring?",
+    "options": "My own productivity|My immediate team's progress|The end-user or customer's experience|The company's long-term goal",
+    "target": "A3_D1"
+  },
+  {
+    "id": "A3_D1",
+    "parentId": "A3_OPEN",
+    "type": "decision",
+    "logic": "answer=My own productivity:A3_Q_SELF;answer=The end-user|The company:A3_Q_ALTRO"
+  },
+  {
+    "id": "A3_Q_SELF",
+    "parentId": "A3_D1",
+    "type": "question",
+    "text": "Focusing on personal growth is vital. How did your focus on 'Self' today help the larger team?",
+    "options": "By finishing my tasks on time|By staying out of others' way|I'm not sure it did help the team|It allowed me to master a new skill",
+    "signal": "axis3:self"
+  },
+  {
+    "id": "A3_Q_ALTRO",
+    "parentId": "A3_D1",
+    "type": "question",
+    "text": "Thinking about the end-user provides deep meaning. What did you notice about their needs today?",
+    "options": "They need more simplicity|They are facing a bottleneck I can fix|I realized I need to learn more about them|Their success is my primary motivation",
+    "signal": "axis3:altrocentric"
+  },
+  {
+    "id": "SUMMARY",
+    "parentId": null,
+    "type": "summary",
+    "text": "Today, you demonstrated a high level of {axis1.dominant} agency. You leaned towards {axis2.dominant} in your interactions and kept a {axis3.dominant} focus on the work. Reflection: '{A1_OPEN.answer}' was just the start; your choices defined the rest.",
+    "target": "END"
+  },
+  {
+    "id": "END",
+    "parentId": "SUMMARY",
+    "type": "end",
+    "text": "Rest well. Your reflection is complete."
+  }
+]
